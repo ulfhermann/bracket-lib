@@ -158,11 +158,13 @@ impl ScreenScaler {
         desired_y -= desired_y % max_font.1;
 
         if desired_y < height {
+            self.smooth_gutter_x = 0;
             self.smooth_gutter_y = height - desired_y;
         } else {
             let mut desired_x = (height as f32 / self.aspect_ratio) as u32;
             desired_x -= desired_x % max_font.0;
             self.smooth_gutter_x = width - desired_x;
+            self.smooth_gutter_y = 0;
         }
 
         self.recalculate_coordinates();
